@@ -1,3 +1,12 @@
+# fork 배경
+
+iOS 17 에서 제대로 표시가 되지 않는 이슈를 수정하기 위해 레포 fork 와 별도 유지보수를 시작했습니다.
+
+현재 PanModal 은 마지막 배포가 20년으로, 올라온 PR 들에 대해 관리를 하고 있지 않은 상황입니다. 
+
+저희가 따로 필요한 유지보수를 하거나 장기적으론 이 라이브러리 자체에 대한 대응을 고민해야 하는 상태입니다.
+
+--- 
 
 ### PanModal is an elegant and highly customizable presentation API for constructing bottom sheet modals on iOS.
 
