@@ -117,11 +117,11 @@ public extension PanModalPresentable where Self: UIViewController {
 
     }
 
-    func panModalWillDismiss() {
+    func panModalWillDismiss(isDismissedForCancel: Bool) {
 
     }
 
-    func panModalDidDismiss() {
+    func panModalDidDismiss(isDismissedForCancel: Bool) {
 
     }
 }

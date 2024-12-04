@@ -99,6 +99,11 @@ open class PanModalPresentationController: UIPresentationController {
         return presentedViewController as? PanModalPresentable
     }
 
+    /**
+     A Flag is Tap the dimmed background to return whether it is off or on
+     */
+    private var isDismissedForCancel: Bool = false
+
     // MARK: - Views
 
     /**
@@ -113,6 +118,7 @@ open class PanModalPresentationController: UIPresentationController {
         }
         view.didTap = { [weak self] _ in
             if self?.presentable?.allowsTapToDismiss == true {
+                self?.isDismissedForCancel = true
                 self?.presentedViewController.dismiss(animated: true)
             }
         }
@@ -203,7 +209,7 @@ open class PanModalPresentationController: UIPresentationController {
     }
 
     override public func dismissalTransitionWillBegin() {
-        presentable?.panModalWillDismiss()
+        presentable?.panModalWillDismiss(isDismissedForCancel: self.isDismissedForCancel)
 
         guard let coordinator = presentedViewController.transitionCoordinator else {
             backgroundView.dimState = .off
@@ -223,8 +229,7 @@ open class PanModalPresentationController: UIPresentationController {
 
     override public func dismissalTransitionDidEnd(_ completed: Bool) {
         if !completed { return }
-        
-        presentable?.panModalDidDismiss()
+        presentable?.panModalDidDismiss(isDismissedForCancel: self.isDismissedForCancel)
     }
 
     /**
@@ -527,6 +532,7 @@ private extension PanModalPresentationController {
                     transition(to: .shortForm)
 
                 } else {
+                    self.isDismissedForCancel = true
                     presentedViewController.dismiss(animated: true)
                 }
 
@@ -545,6 +551,7 @@ private extension PanModalPresentationController {
                     transition(to: .shortForm)
 
                 } else {
+                    self.isDismissedForCancel = true
                     presentedViewController.dismiss(animated: true)
                 }
             }
